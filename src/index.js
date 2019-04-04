@@ -15,6 +15,9 @@ import resolvers from './resolvers';
 import models, { sequelize } from './models';
 import loaders from './loaders';
 
+
+const GQL_SECRET = process.env.GQL_SECRET;
+
 const app = express();
 
 app.use(cors());
@@ -26,7 +29,7 @@ const getMe = async req => {
 
   if (token) {
     try {
-      return await jwt.verify(token, process.env.SECRET);
+      return await jwt.verify(token, GQL_SECRET);
     } catch (e) {
       throw new AuthenticationError(
         'Your session expired. Sign in again.',
@@ -70,7 +73,7 @@ const server = new ApolloServer({
       return {
         models,
         me,
-        secret: process.env.SECRET,
+        secret: GQL_SECRET,
         loaders: {
           user: new DataLoader(keys =>
             loaders.user.batchUsers(keys, models),
@@ -87,7 +90,7 @@ const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 const isTest = !!process.env.TEST_DATABASE;
-const isProduction = !!process.env.DATABASE_URL;
+const isProduction = !!process.env.GQL_DATABASE_URL;
 const port = process.env.PORT || 8000;
 
 sequelize.sync({ force: isTest || isProduction }).then(async () => {

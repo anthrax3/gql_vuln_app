@@ -3,15 +3,18 @@ import Sequelize from 'sequelize';
 let sequelize;
 if (process.env.DATABASE_URL) {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres',
+    dialect: 'sqlite',
   });
 } else {
   sequelize = new Sequelize(
-    process.env.TEST_DATABASE || process.env.DATABASE,
-    process.env.DATABASE_USER,
-    process.env.DATABASE_PASSWORD,
+    process.env.TEST_DATABASE || process.env.GQL_DATABASE,
+    // process.env.DATABASE_USER,
+    // process.env.DATABASE_PASSWORD,
     {
-      dialect: 'postgres',
+      dialect: 'sqlite',
+      // the storage engine for sqlite
+      // - default ':memory:'
+      storage: process.env.GQL_DB_PATH
     },
   );
 }
