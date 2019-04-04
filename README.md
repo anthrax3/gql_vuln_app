@@ -24,3 +24,8 @@ GQL_SECRET=asdlplplfwfwefwekwself.2342.dawasdq
 
 The `SECRET` is just a random string for your authentication. Keep all these information secure by adding the *.env* file to your *.gitignore* file. No third-party should have access to this information.
 
+
+ #### Security Issues
+
+ ...
+ 
