@@ -8,8 +8,8 @@ if (process.env.DATABASE_URL) {
 } else {
   sequelize = new Sequelize(
     process.env.TEST_DATABASE || process.env.GQL_DATABASE,
-    // process.env.DATABASE_USER,
-    // process.env.DATABASE_PASSWORD,
+     process.env.DATABASE_USER,
+     process.env.DATABASE_PASSWORD,
     {
       dialect: 'sqlite',
       // the storage engine for sqlite
