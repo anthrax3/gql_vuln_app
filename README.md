@@ -27,5 +27,5 @@ The `SECRET` is just a random string for your authentication. Keep all these inf
 
  #### Security Issues
 
- ...
  
+ TO ADD a lot_ :)
